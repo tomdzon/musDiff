@@ -1,3 +1,7 @@
 <?php
 
-return [];
+return [
+    'application' => [
+        'debug' => false,
+    ],
+];

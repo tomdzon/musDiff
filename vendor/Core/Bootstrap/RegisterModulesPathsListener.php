@@ -11,9 +11,9 @@ class RegisterModulesPathsListener
         $di = $application->getDI();
         $config = $di->get('config');
 
-        if (isset($config['module_paths'])) {
+        if (isset($config['modulePaths'])) {
             $paths = [];
-            foreach ($config['module_paths'] as $path) {
+            foreach ($config['modulePaths'] as $path) {
                 $paths[] = realpath($path);
             }
             $loader = new Loader();

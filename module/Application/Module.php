@@ -10,7 +10,7 @@ class Module implements ModuleDefinitionInterface
     {
         $loader = new \Phalcon\Loader();
         $loader->registerNamespaces([
-            'Application' => __DIR__ . DS . 'src',
+            'Application' => __DIR__ . '/src',
         ]);
         $loader->register();
     }
@@ -19,7 +19,7 @@ class Module implements ModuleDefinitionInterface
     {
         return [
             'router' => [
-                'not_found_route' => [
+                'notFoundRoute' => [
                     'module' => 'Application',
                     'namespace' => 'Application\Controller',
                     'controller' => 'index',
@@ -45,17 +45,17 @@ class Module implements ModuleDefinitionInterface
                         'defaults' => [
                             'module' => 'Application',
                             'namespace' => 'Application\Controller',
-                            'controller' => 'index',
-                            'action' => 'index',
+                            'controller' => 1,
+                            'action' => 2,
                         ],
                     ],
                 ],
             ],
-            'view_strategy' => [
+            'viewStrategy' => [
                 'application' => [ // module name in lowercase
-                    'view_dir'       => __DIR__ . str_replace('/', DS, '/view/templates/'),
-                    'layouts_dir'    => str_replace('/', DS, '../layouts/'),
-                    'default_layout' => 'layout',
+                    'viewDir' => __DIR__ . '/view/templates/',
+                    'layoutsDir' => '../layouts/',
+                    'defaultLayout' => 'layout',
                 ],
             ],
         ];

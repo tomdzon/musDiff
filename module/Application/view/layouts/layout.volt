@@ -5,9 +5,8 @@
     <title>Skeleton Application</title>
 </head>
 <body>
-<div>
-    <?= $this->getContent() ?>
-
-</div>
+    <div>
+        {{ content() }}
+    </div>
 </body>
 </html>

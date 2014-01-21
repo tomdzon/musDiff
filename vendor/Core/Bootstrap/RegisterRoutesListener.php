@@ -12,6 +12,8 @@ class RegisterRoutesListener
         $config = $di->get('config');
 
         $router = $di->getShared('router');
+        $router->removeExtraSlashes(true);
+
         if (isset($config['router']['routes'])) {
             $routes = $config['router']['routes'];
             foreach ($routes as $routeName => $routeOptions) {
@@ -36,9 +38,9 @@ class RegisterRoutesListener
                 $router->add($routeOptions['route'], (array) $routeOptions['defaults'])
                     ->setName($routeName);
             }
-            if (isset($config['router']['not_found_route'])) {
+            if (isset($config['router']['notFoundRoute'])) {
                 $router->notFound(
-                    (array) $config['router']['not_found_route']
+                    (array) $config['router']['notFoundRoute']
                 );
             }
         }

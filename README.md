@@ -9,14 +9,14 @@ systems.
 Features / Goals
 ----------------
 
-* Using composer. [COMPLETE]
+* Using composer.
 
 Application adapted for use of third-party modules using [composer](http://getcomposer.org).
 Just specify the third-party module in the composer.json and install it by running the command:
 ```$ php composer.phar update```
 Thus, you can extend the functionality of your application, simply by adding the required module with the composer.
 
-* Manage modules using the configuration. [COMPLETE]:
+* Manage modules using the configuration.:
 
 To use a module, simply add it in the configuration.
 If any functionality you do not need, remove the module from the configuration.
@@ -31,12 +31,12 @@ return [
 ];
 ```
 
-* Automatically merge configuration files [COMPLETE].
+* Automatically merge configuration files.
 
 The default config directory is defined as follows:
 ```
 return [
-    'config_glob_paths' => [
+    'configGlobPaths' => [
         'config/autoload/{,*.}{global,local}.php',
     ],
 ];
@@ -48,7 +48,7 @@ Each configuration file will overwrite the settings of the previous file.
 Thus, for example, in the file "mydb.local.php" you can specify the configuration of the connection to the database
 and it will overwrite the settings of the third-party module.
 
-* Setting DI through configuration. [COMPLETE]
+* Setting DI through configuration.
 
 You can configure DI as follows:
 ```
@@ -63,7 +63,7 @@ return [
 ],
 ```
 
-* Setting routes through configuration. [COMPLETE]
+* Setting routes through configuration.
 
 You can configure routing as follows:
 ```
@@ -87,13 +87,13 @@ return [
 ```
 Parameters "module" and "namespace" are required.
 
-* Caching a merged configuration. [COMPLETE]
+* Caching a merged configuration.
 
 By default configuration is not cached, because it is necessary when developing an application.
 To enable configuration caching, set the `enabled` option:
 ```
 return [
-    'config_cache' => [
+    'configCache' => [
         'enabled' => true, // enable or disable configuration caching
         'lifetime' => 86400, // 24 hours
         'storage' => [
@@ -107,23 +107,23 @@ return [
 ];
 ```
 
-* Module feature getConfig() [COMPLETE]
+* Module feature getConfig()
 
 Module class may provide a method `getConfig()`.
 This configuration will have a higher priority than the configuration files.
 
-* Default view strategy [COMPLETE]
+* Default view strategy
 
 Using the method `getConfig()` of `Module` class, you can configure the view strategy for your module as follows:
 ```
 public function getConfig()
 {
     return [
-        'view_strategy' => [
+        'viewStrategy' => [
             'application' => [ // module name in lowercase
-                'view_dir'       => __DIR__ . str_replace('/', DS, '/view/templates/'),
-                'layouts_dir'    => str_replace('/', DS, '../layouts/'),
-                'default_layout' => 'layout',
+                'viewDir'       => __DIR__ . str_replace('/', DS, '/view/templates/'),
+                'layoutsDir'    => str_replace('/', DS, '../layouts/'),
+                'defaultLayout' => 'layout',
             ],
         ],
         ...
@@ -133,11 +133,11 @@ public function getConfig()
 You can also specify your own view strategy through the configuration as follows:
 ```
 return [
-    'view_strategy_class' => 'MyModule\MyViewStrategy',
+    'viewStrategyClass' => 'MyModule\MyViewStrategy',
 ];
 ```
 
-* Module feature onBootstrap() [COMPLETE]
+* Module feature onBootstrap()
 
 Module class may provide a method `onBootstrap()`.
 If the module provides this method, it will automatically be called before handle the application.

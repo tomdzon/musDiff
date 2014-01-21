@@ -4,14 +4,10 @@ namespace Core\Mvc;
 
 use Phalcon\Mvc\Application as MvcApplication,
     Phalcon\Mvc\Dispatcher,
-    Phalcon\Mvc\View,
-    //
     Phalcon\DI\FactoryDefault as DiFactory,
     Phalcon\Http\Response,
     Phalcon\Config,
-    //
     Phalcon\Debug,
-    //
     Exception;
 
 class Application extends MvcApplication
@@ -31,7 +27,6 @@ class Application extends MvcApplication
         'Core\Bootstrap\LoadModulesListener',
 
         // bootstrap:beforeMergeConfig
-        'Core\Bootstrap\RegisterViewStrategyListener',
 
         // bootstrap:mergeConfig
         'Core\Bootstrap\ConfigCacheListener',
@@ -41,6 +36,9 @@ class Application extends MvcApplication
         // bootstrap:afterMergeConfig
         'Core\Bootstrap\RegisterDIListener',
         'Core\Bootstrap\RegisterRoutesListener',
+        'Core\Bootstrap\RegisterUrlListener',
+        'Core\Bootstrap\RegisterViewListener',
+        'Core\Bootstrap\RegisterViewStrategyListener',
 
         // bootstrap:bootstrapModules
         'Core\Bootstrap\BootstrapModulesListener',
@@ -78,8 +76,6 @@ class Application extends MvcApplication
             return $application;
         }
 
-        Application::setDebugMode(Application::isDebugMode());
-
         $config = new Config($configuration);
         $di = new DiFactory();
         $di->setShared('config', $config);
@@ -93,9 +89,6 @@ class Application extends MvcApplication
         $dispatcher = new Dispatcher();
         $dispatcher->setEventsManager($eventsManager);
         $di->setShared('dispatcher', $dispatcher);
-
-        $view = new View();
-        $di->setShared('view', $view);
 
         return $application->bootstrap();
     }
@@ -122,6 +115,7 @@ class Application extends MvcApplication
     public function handle($url = '')
     {
         try {
+            $di = $this->getDI();
             $eventsManager = $this->getEventsManager();
             $eventsManager->fire('bootstrap:init', $this);
             $eventsManager->fire('bootstrap:beforeMergeConfig', $this);
@@ -129,9 +123,12 @@ class Application extends MvcApplication
             $eventsManager->fire('bootstrap:afterMergeConfig', $this);
             $eventsManager->fire('bootstrap:bootstrapModules', $this);
             $eventsManager->fire('bootstrap:beforeHandle', $this);
+
+            $this->setDebugMode($di->get('config')['application']['debug']);
+
             return parent::handle($url);
         } catch (Exception $e) {
-            if (Application::isDebugMode()) {
+            if ($this->isDebugMode()) {
                 (new Debug())->onUncaughtException($e);
             }
             return new Response();

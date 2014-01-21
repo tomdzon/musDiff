@@ -38,22 +38,22 @@ class DefaultViewStrategy
             }
         }
 
-        if (! isset($this->config['view_strategy'][$module])) {
+        if (! isset($this->config['viewStrategy'][$module])) {
             return;
         }
 
-        $options = $this->config['view_strategy'][$module];
+        $options = $this->config['viewStrategy'][$module];
 
-        if (isset($options['view_dir'])) {
-            $this->view->setViewsDir($options['view_dir']);
+        if (isset($options['viewDir'])) {
+            $this->view->setViewsDir($options['viewDir']);
         }
 
-        if (isset($options['layouts_dir'])) {
-            $this->view->setLayoutsDir($options['layouts_dir']);
+        if (isset($options['layoutsDir'])) {
+            $this->view->setLayoutsDir($options['layoutsDir']);
         }
 
-        if (isset($options['default_layout'])) {
-            $this->view->setLayout($options['default_layout']);
+        if (isset($options['defaultLayout'])) {
+            $this->view->setLayout($options['defaultLayout']);
         }
     }
 }

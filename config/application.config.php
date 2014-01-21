@@ -1,25 +1,28 @@
 <?php
 
 return [
-    'module_paths' => [
-        './module',
-        './vendor',
+    'modulePaths' => [
+        './module/',
+        './vendor/',
     ],
     'modules' => [
         'Application',
     ],
-    'config_glob_paths' => [
+    'configGlobPaths' => [
         'config/autoload/{,*.}{global,local}.php',
     ],
-    'config_cache' => [
+    'configCache' => [
         'enabled' => false, // enable or disable configuration caching
         'lifetime' => 86400, // 24 hours
         'storage' => [
             'class' => 'Phalcon\Cache\Backend\File',
             'options' => [
-                'cacheDir' => './data/cache',
+                'cacheDir' => './data/cache/',
             ],
         ],
     ],
-    'view_strategy_class' => 'Core\Mvc\DefaultViewStrategy',
+    'viewStrategyClass' => 'Core\Mvc\DefaultViewStrategy',
+    'application' => [
+        'libraryDir' => APPLICATION_PATH . '/library/',
+    ],
 ];

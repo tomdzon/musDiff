@@ -43,8 +43,8 @@ class ConfigCacheListener
         $di = $application->getDI();
         $config = $di->get('config');
 
-        if (! (isset($config['config_cache']['enabled'])
-                && $config['config_cache']['enabled'])
+        if (! (isset($config['configCache']['enabled'])
+                && $config['configCache']['enabled'])
         ) {
             return;
         }
@@ -89,7 +89,7 @@ class ConfigCacheListener
 
     protected function readConfig($config)
     {
-        $options = $config['config_cache'];
+        $options = $config['configCache'];
 
         if (isset($options['lifetime'])) {
             $this->lifetime = $options['lifetime'];

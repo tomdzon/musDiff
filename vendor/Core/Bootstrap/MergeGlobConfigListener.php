@@ -11,8 +11,8 @@ class MergeGlobConfigListener
         $di = $application->getDI();
         $config = $di->get('config');
 
-        if (isset($config['config_glob_paths'])) {
-            $globPats = (array) $config['config_glob_paths'];
+        if (isset($config['configGlobPaths'])) {
+            $globPats = (array) $config['configGlobPaths'];
             foreach ($globPats as $path) {
                 $files = glob($path, GLOB_BRACE);
                 foreach ($files as $file) {
