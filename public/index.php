@@ -4,12 +4,6 @@ defined('APPLICATION_PATH') || define('APPLICATION_PATH', realpath(__DIR__ . '/.
 defined('VENDOR_PATH') || define('VENDOR_PATH', realpath(__DIR__ . '/../vendor'));
 defined('PUBLIC_PATH') || define('PUBLIC_PATH', __DIR__);
 
-if (version_compare(PHP_VERSION, '5.4.0', '<=')) {
-    exit(sprintf(
-        'To run this application required PHP >= 5.4.0 Current version is %s.',
-        PHP_VERSION
-    ));
-}
 if (!extension_loaded('phalcon')) {
     exit('Phalcon extension is not installed. See http://phalconphp.com/en/download');
 }
